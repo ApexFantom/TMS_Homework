@@ -87,6 +87,7 @@ class Circle(Point):
             return abs(a.radius - b.radius) * 2 * math.pi
     @staticmethod
     def vis():
+        #сделал визуализацию через матплотлиб, темносерый - большой круг уменьшаемое, светлосерый - вычитаемое, и белый в середине - разность
         ax = plt.gca()
         for element in Circle.patchList:
             ax.add_patch(element)
