@@ -10,7 +10,10 @@ class Human():
     def evaStatic(self):
         return print('я тоже Аянами Рей')
 
-Evangelion = type('Eva',(),{})
+class Evangelion(type):
+    def __new__(cls, clsname, superclasses, attributedict):
+        return type(clsname, superclasses, attributedict)
+
 
 a = Human()
 b = Human.evaClassMethod()
