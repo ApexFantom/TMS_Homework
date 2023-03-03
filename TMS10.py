@@ -17,7 +17,9 @@ while(cont):
     except SyntaxError:
         print("X> синтаксическая ошибка")
     except NameError:
-        print("X> переменная не обьявлена")
+        print("X> калькулятор не принимает переменные")
+    except:
+        print("X> ошибка при выполнении вычислений")
     finally:
         prompt = input('продолжить? [y] [n]')
         cont = True if (prompt == 'y') else False
