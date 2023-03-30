@@ -7,15 +7,13 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-engine = create_engine('sqlite:///db.db')
+engine = create_engine('sqlite:///students.db')
 
 class Base(DeclarativeBase): pass
 class Students(Base):
-    __tablename__="Person"
-    id = Column(Integer, primary_key=True, index=True)
-    email = Column(String(50), unique=True)
+    __tablename__ = "Person"
+    email = Column(String(50), unique=True, primary_key=True, index=True)
     name = Column(String(20))
-    date = Column(String, default=datetime.utcnow)
 
 Base.metadata.create_all(bind=engine)
 
@@ -23,17 +21,26 @@ Base.metadata.create_all(bind=engine)
 @app.route("/", methods=["POST", "GET"])
 def index():
 
+
     if request.method == 'POST':
-        if request.form['name'] and request.form['email']:
+
+        if request.method == 'GET':
             with Session(autoflush=False, bind=engine) as db:
-                new = Students(name=request.form['name'], email=request.form['email'])
-                db.add(new)
-                db.commit()
+
                 people = db.query(Students).all()
                 file_loader = FileSystemLoader('templates')
                 env = Environment(loader=file_loader)
                 tm = env.get_template('index.html')
                 return tm.render(users=people)
+        if request.form['name'] and request.form['email']:
+            with Session(autoflush=False, bind=engine) as db:
+
+                new = Students(name=request.form['name'], email=request.form['email'])
+                db.add(new)
+                db.commit()
+                return render_template('index.html')
+
+
     return render_template('index.html')
 
 

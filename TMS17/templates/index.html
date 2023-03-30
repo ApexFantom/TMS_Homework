@@ -41,16 +41,16 @@
     <h3>Только в эту пятницу вы можете узнать насколько вы ничтожны.<br>Мы проведем с вами пару тестовых собеседований - Отвечайте на вопросы, либо познайте горечь отказов.<br>Мероприятие пройдет 24 марта в 19.00 по адресу Тимирязева 65Б, 203 кабинет(2 этаж)</h3>
     <h3>Мы ждем вас!</h3>
     <p>Для участия в мероприятии заполните анкету ниже:</p>
-    <div class = "reg-box-outter" method="post">
-        <input class="name reg-box-inner" name="name" placeholder="Введите ваше имя" />
-        <input class="email reg-box-inner" name="email" placeholder="Введите ваш e-mail" />
+    <form class = "reg-box-outter" action="/" method="post">
+        <input class="name" name="name" placeholder="Введите ваше имя" />
+        <input class="email" name="email" placeholder="Введите ваш e-mail" />
         <input type="submit" value="Зарегистрироваться" />
-        <div>
+        <form>
       {% for x in users -%}
       <p>{{ x.name }} / {{ x.email }}</p>
       {% endfor %}
-      </div>
-    </div>
+      </form>
+    </form>
     
 </body>
 </html>
